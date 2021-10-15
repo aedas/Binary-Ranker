@@ -1,2 +1,2 @@
 # Binary-Ranker
-Basic Binary Ranker
+Basic binary ranker
