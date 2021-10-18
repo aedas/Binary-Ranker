@@ -48,7 +48,8 @@ public class ImageEventHandler implements EventHandler<MouseEvent> {
 	public void endSelection() {
 		this.scene_builder.initSaveRankScene(stage);
 		RankSaver saver = new RankSaver();
-		saver.saveRankings(this.scene_builder, this.stage, this.getRankingsByImage(), this);
+		saver.saveRankingsAsText(this.getRankingsByName());
+		saver.saveRankings(this.scene_builder, this.stage, this.getRankingsByImage(), this, 0);
 	}
 
 	public ArrayList<Integer> getRankingsByInteger(){

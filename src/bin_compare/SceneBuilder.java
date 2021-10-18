@@ -1,8 +1,6 @@
 package bin_compare;
 
 import java.io.File;
-import java.util.ArrayList;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -58,10 +56,10 @@ public class SceneBuilder {
 
 	public void initSaveRankScene(Stage stage) {
 		Text text = new Text("Rankings Saved!");
-		Font font = new Font("Arial Bold", 50);
-		text.setY(175);
+		Font font = new Font("Arial Bold", this.img_size/8);
+		text.setY(this.img_size * 7 / 16);
 		text.setFont(font);
-		text.setX(200);
+		text.setX(this.img_size/2);
 		Group root = new Group();
 		root.getChildren().add(text);
 		Scene scene = new Scene(root);
