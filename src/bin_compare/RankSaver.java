@@ -20,7 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class RankSaver {
+public class RankSaver{
 	
 	LocalDateTime now = null;
 	String file_name = null;
@@ -96,22 +96,24 @@ public class RankSaver {
 	public void saveRankings(SceneBuilder builder, Stage stage, List<Image> imgs, ImageEventHandler img_handler, Integer start) {
 		Integer side = (int) Math.ceil(Math.sqrt(imgs.size()));
 		Group root = new Group();
-		Font font = new Font("Arial Bold", builder.img_size * 4 / 30);
+		Font font = new Font("Arial Bold", builder.output_size * 4 / 30);
 		Text text = new Text("Rankings:");
 		text.setFont(font);
-		text.setX(builder.img_size/5);
-		text.setY(builder.img_size * 3 / 20);
+		text.setX(builder.output_size/5);
+		text.setY(builder.output_size * 3 / 20);
 		root.getChildren().add(text);
 		Integer i = start + 1;
 		for (Image img: imgs) {
 			Text rank = new Text(i.toString());
 			rank.setFont(font);
-			rank.setX(builder.img_size/20 + builder.img_size * ((i-1-start) % side));
-			rank.setY((builder.img_size + builder.img_size/6) * ((i-1-start) / side) + builder.img_size * 19 / 60);
-			ImageView img_view = builder.initImgView(builder.img_size, builder.img_size);
+			rank.setX(builder.output_size/20 + builder.output_size * ((i-1-start) % side));
+			rank.setY((builder.output_size + builder.output_size/6) * ((i-1-start) / side) + builder.output_size * 19 / 60);
+			ImageView img_view = builder.initImgView(builder.output_size, builder.output_size);
 			img_view.setImage(img);
-			img_view.setX(builder.img_size * ((i-1-start) % side));
-			img_view.setY((builder.img_size + builder.img_size/6) * ((i-1-start) / side) + builder.img_size/3);
+			img_view.setX(builder.output_size * ((i-1-start) % side));
+			img_view.setY((builder.output_size + builder.output_size/6) * ((i-1-start) / side) + builder.output_size/3);
+			img_view.setFitHeight(builder.output_size);
+			img_view.setFitWidth(builder.output_size);
 			root.getChildren().addAll(img_view, rank);
 			i++;
 		}

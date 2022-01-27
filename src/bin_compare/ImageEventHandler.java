@@ -1,6 +1,8 @@
 package bin_compare;
 
 import java.util.ArrayList;
+
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,10 +48,23 @@ public class ImageEventHandler implements EventHandler<MouseEvent> {
 	}
 
 	public void endSelection() {
-		this.scene_builder.initSaveRankScene(stage);
 		RankSaver saver = new RankSaver();
-		saver.saveRankingsAsText(this.getRankingsByName());
-		saver.saveRankings(this.scene_builder, this.stage, this.getRankingsByImage(), this, 0);
+		Runnable saveRanks = () -> {
+			Platform.runLater(() -> {
+				saver.saveRankingsAsText(this.getRankingsByName());
+				saver.saveRankings(this.scene_builder, this.stage, getRankingsByImage(),this, 0);
+				this.stage.show();
+			});
+		};
+		Runnable initScene = () -> {
+			Platform.runLater(() -> {
+				this.scene_builder.initSaveRankScene();
+			});
+		};
+		Thread saveRankThread = new Thread(saveRanks);
+		Thread initSceneThread = new Thread(initScene);
+		initSceneThread.start();
+		saveRankThread.start();
 	}
 
 	public ArrayList<Integer> getRankingsByInteger(){

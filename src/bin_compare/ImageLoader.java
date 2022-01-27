@@ -13,10 +13,11 @@ public class ImageLoader {
 
 	public ImagePool load() {
 		String[] names = parent.list();
+		String p_path = "file:" + parent.getName();
 		ImagePool img_pool = new ImagePool();
-		ImagePoolNode prev = new ImagePoolNode(new Image(names[0]), names[0]);
+		ImagePoolNode prev = new ImagePoolNode(new Image(p_path + "\\" + names[0]), names[0]);
 		for (String name:names) {
-			ImagePoolNode curr = new ImagePoolNode(new Image(name), name);
+			ImagePoolNode curr = new ImagePoolNode(new Image(p_path + "\\" + name), name);
 			if (img_pool.isEmpty()) {
 				img_pool.add(curr);
 			} else {

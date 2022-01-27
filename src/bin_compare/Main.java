@@ -13,8 +13,8 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
-		SceneBuilder scene_builder = new SceneBuilder(400);
-		scene_builder.initSelectionScene(stage);
+		SceneBuilder scene_builder = new SceneBuilder(600, stage);
+		scene_builder.initSelectionScene();
 	}
 
 }

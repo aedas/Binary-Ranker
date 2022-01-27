@@ -12,13 +12,17 @@ import javafx.stage.Stage;
 
 public class SceneBuilder {
 	final Integer img_size;
+	final Integer output_size = 200;
+	final Stage stage;
 	
-	public SceneBuilder(Integer img_size) {
+	public SceneBuilder(Integer img_size, Stage stage) {
 		this.img_size = img_size;
+		this.stage = stage;
 	}
 
-	public SceneBuilder() {
+	public SceneBuilder(Stage stage) {
 		this.img_size = 250;
+		this.stage = stage;
 	}
 
 	public ImageView initImgView(Integer x_pos, Integer y_pos) {
@@ -31,7 +35,7 @@ public class SceneBuilder {
 		return img_view;
 	}
 
-	public void initSelectionScene(Stage stage) throws Exception {
+	public void initSelectionScene() throws Exception {
 		// TODO Auto-generated method stub
 		ImageLoader img_loader = new ImageLoader(new File("img"));
 		ImagePool img_pool = img_loader.load();
@@ -45,16 +49,16 @@ public class SceneBuilder {
 		ImageEventHandler img_handler = new ImageEventHandler(left, right, ranker, stage, img_pool, this);
 		left.addEventHandler(MouseEvent.MOUSE_CLICKED, img_handler);
 		right.addEventHandler(MouseEvent.MOUSE_CLICKED, img_handler);
-		stage.setResizable(false);
-		stage.setWidth(2 * this.img_size);
-		stage.setHeight(this.img_size);
-		stage.centerOnScreen();
-		stage.setScene(select_scene);
-		stage.setTitle("Binary Ranker");
-		stage.show();
+		this.stage.setResizable(false);
+		this.stage.setWidth(2 * this.img_size + 12.5);
+		this.stage.setHeight(this.img_size + 35);
+		this.stage.centerOnScreen();
+		this.stage.setScene(select_scene);
+		this.stage.setTitle("Binary Ranker");
+		this.stage.show();
 	}
 
-	public void initSaveRankScene(Stage stage) {
+	public void initSaveRankScene() {
 		Text text = new Text("Rankings Saved!");
 		Font font = new Font("Arial Bold", this.img_size/8);
 		text.setY(this.img_size * 7 / 16);
@@ -63,9 +67,8 @@ public class SceneBuilder {
 		Group root = new Group();
 		root.getChildren().add(text);
 		Scene scene = new Scene(root);
-		stage.close();
-		stage.setScene(scene);
-		stage.show();
+		this.stage.setScene(scene);
+		this.stage.close();
 	}
 
 }
